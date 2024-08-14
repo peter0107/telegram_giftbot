@@ -35,10 +35,9 @@ commands=[
 
 #참여버튼
 async def start(update: Update, context: CallbackContext)->None:
-    #URL 설정
-    url="https://localhost:5000"
     
     
+    url="https://giftbot.netlify.app/"
     keyboard=[
         [
             InlineKeyboardButton("참여",url=url)
@@ -53,36 +52,18 @@ async def start(update: Update, context: CallbackContext)->None:
     #관리자만 명령어실행가능
     if member.status in ['administrator','creator']:
         
-        await context.bot.send_message(chat_id = update.effective_chat.id, text="참여신청", reply_markup=reply_markup)
-    
+        await context.bot.send_message(
+            chat_id=update.effective_chat.id,
+            text="참여신청",
+            reply_markup=reply_markup
+        )
     else:
         return
 
 
 
-'''
-#참여버튼클릭시 이벤트
-async def join(update: Update, context: CallbackContext) -> None:
-    query=update.callback_query
-    await query.answer()
-
-    user=query.from_user #버튼 클릭한 사용자 정보
-
-    #사용자가 참여한 상태에서 버튼을 누른 경우
-    if user in candidates:
-        return
-    
-    #사용자가 참여하지 않은 상태에서 버튼을 누른 경우
-    candidates.add(user)
-    logging.info(f"Candidates: {candidates}")
-
-    #참여완료되었다는 메시지를 보냄
-    user_name=user.first_name
-    complete_message=f"{user_name}님이 참여하셨습니다!"
-    await context.bot.send_message(chat_id=user.id,text=complete_message)
 
 '''
-
 #무작위 뽑기
 async def pick(update: Update, context: CallbackContext) -> None:
 
@@ -114,7 +95,7 @@ async def progress(update: Update, context: CallbackContext) -> None:
     if member.status in ['administrator','creator']:
         await update.message.reply_text(f"{len(candidates)}명이 참여하셨습니다")
 
-
+'''
 ###################################
 
 
@@ -124,8 +105,8 @@ def main()->None:
     application.bot.set_my_commands(commands=commands, scope=scope_admin)
     application.add_handler(CommandHandler("start",start))
     #application.add_handler(CallbackQueryHandler(join,pattern='join'))
-    application.add_handler(CommandHandler("pick",pick))
-    application.add_handler(CommandHandler("progress",progress))
+    '''application.add_handler(CommandHandler("pick",pick))
+    application.add_handler(CommandHandler("progress",progress))'''
 
     application.run_polling(allowed_updates=Update.ALL_TYPES)
 
@@ -133,6 +114,5 @@ def main()->None:
 
 if __name__== "__main__":
     main()
-
 
 

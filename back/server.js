@@ -1,7 +1,10 @@
 const express = require('express');
 const mysql = require('mysql');
+const cors=require('cors');
 
 const app=express();
+app.use(cors());
+app.use(express.json());
 
 const PORT=process.env.PORT || 4000;
 
@@ -22,7 +25,8 @@ db.connect(err => {
 
 //데이터 저장하는 엔드포인트
 app.post('/api/participants', (req, res) => {
-    const { phoneNumber} = req.body;
+    console.log(req);
+    const { phoneNumber } = req.body;
   
     const query = 'INSERT INTO participants (phoneNumber) VALUES (?)';
     db.query(query, [phoneNumber], (err, result) => {
@@ -36,7 +40,7 @@ app.post('/api/participants', (req, res) => {
   });
 
 // 데이터 조회하는 엔드포인트
-app.get('/api/participants', (req, res) => {
+app.get('/api/participants', (req,res) => {
     db.query('SELECT * FROM participants', (err, results) => {
       if (err) {
         console.error('데이터베이스 조회 오류:', err);

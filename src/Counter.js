@@ -28,6 +28,7 @@ function App() {
 
       //정상적인 경우
       if(response.status===201){
+        alert("SUCCESS");
         if(phoneNumber===''){
           alert('전화번호를 입력해주세요.');
           return;

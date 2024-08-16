@@ -1,3 +1,4 @@
+import mysql.connector
 import logging
 import random
 from telegram import Update, KeyboardButton, ReplyKeyboardMarkup, InlineKeyboardButton, InlineKeyboardMarkup,BotCommandScopeAllChatAdministrators, BotCommand,WebAppInfo
@@ -28,6 +29,14 @@ commands=[
     BotCommand(command='pick', description="Random Selection"),
     BotCommand(command='progress', description="How many people")
 ]
+
+#MySQL 데이터베이스 설정
+db_config={
+    'host': 'localhost',
+    'user': 'root',
+    'password': 'yourpassword',
+    'database': 'mydatabase'
+}
 
 
 ###########명령어############
@@ -63,7 +72,8 @@ async def start(update: Update, context: CallbackContext)->None:
 
 
 
-'''
+
+
 #무작위 뽑기
 async def pick(update: Update, context: CallbackContext) -> None:
 
@@ -73,6 +83,8 @@ async def pick(update: Update, context: CallbackContext) -> None:
 
     #관리자만 명령어실행가능
     if member.status in ['administrator','creator']:
+        conn=mysql.connector.connect(**db_config)
+        cursor=conn.cursor(dictionary=True)
         if not candidates:
             await update.message.reply_text("아직 참여한 사용자가 없습니다.")
             return
@@ -84,7 +96,7 @@ async def pick(update: Update, context: CallbackContext) -> None:
 
     
 
-
+'''
 #참가인원 보기
 async def progress(update: Update, context: CallbackContext) -> None:
     user=update.effective_user
@@ -105,8 +117,8 @@ def main()->None:
     application.bot.set_my_commands(commands=commands, scope=scope_admin)
     application.add_handler(CommandHandler("start",start))
     #application.add_handler(CallbackQueryHandler(join,pattern='join'))
-    '''application.add_handler(CommandHandler("pick",pick))
-    application.add_handler(CommandHandler("progress",progress))'''
+    application.add_handler(CommandHandler("pick",pick))
+    #application.add_handler(CommandHandler("progress",progress))
 
     application.run_polling(allowed_updates=Update.ALL_TYPES)
 

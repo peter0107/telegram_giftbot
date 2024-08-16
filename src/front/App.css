@@ -2,6 +2,20 @@
   text-align: center;
 }
 
+.Title{
+  margin-bottom: 40px;
+}
+
+
+
+.result{
+  margin-top: 20px;
+}
+
+.submit{
+  margin-top: 20px;
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;

@@ -51,8 +51,16 @@ function App() {
     
   };
 
-  const handleShowParticipants=() => {
-    alert(`참가자 목록: \n ${participants.join('\n')}`);
+  const handleShowParticipants= async () => {
+    try {
+      const response = await axios.get('http://localhost:4000/api/participants');
+      const participantList = response.data.map(participant => participant.phoneNumber).join('\n');
+      alert(`참가자 목록: \n${participantList}`);
+    } catch (error) {
+      console.error("참가자 목록을 가져오는 데 실패했습니다: ", error);
+      alert('참가자 목록을 가져오는 데 실패했습니다.');
+    }
+
   };
 
   return (

@@ -9,10 +9,10 @@ app.use(express.json());
 const PORT=process.env.PORT || 4000;
 
 const db=mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: '0107',
-    database: 'participants'
+    host: 'giftbot-database.cc0lokhfxaeb.us-east-2.rds.amazonaws.com',
+    user: 'admin',
+    password: 'junemoiscute',
+    database: 'giftbot'
 });
 
 db.connect(err => {
@@ -56,6 +56,6 @@ app.get('/',(req,res) =>{
 })
 
 app.listen(PORT,()=>{
-    console.log(`Server run : http://localhost:${PORT}/`)
+    console.log(`Server run : giftbot-database.cc0lokhfxaeb.us-east-2.rds.amazonaws.com:${PORT}/`)
 })
 

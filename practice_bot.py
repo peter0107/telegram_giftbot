@@ -32,10 +32,10 @@ commands=[
 
 #MySQL 데이터베이스 설정
 db_config={
-    'host': 'localhost',
-    'user': 'root',
-    'password': 'yourpassword',
-    'database': 'mydatabase'
+    'host': 'giftbot-database.cc0lokhfxaeb.us-east-2.rds.amazonaws.com',
+    'user': 'admin',
+    'password': 'junemoiscute',
+    'database': 'participants'
 }
 
 
@@ -85,12 +85,22 @@ async def pick(update: Update, context: CallbackContext) -> None:
     if member.status in ['administrator','creator']:
         conn=mysql.connector.connect(**db_config)
         cursor=conn.cursor(dictionary=True)
-        if not candidates:
+
+        #참가자 목록을 가져오기
+        cursor.execute('SELECT * FROM phoneNumber')
+        results=cursor.fetchall()
+
+        if not results:
             await update.message.reply_text("아직 참여한 사용자가 없습니다.")
+            conn.close()
             return
     
-        chosen_user=random.choice(list(candidates))
-        await update.message.reply_text(f"@{chosen_user.username if chosen_user.username else chosen_user.full_name}님 축하드립니다!! 당첨되셨습니다잉")
+        chosen_user=random.choice(results)
+        await update.message.reply_text(f"@{chosen_user['phoneNumber']}님 축하드립니다!! 당첨되셨습니다.")
+        
+
+        #연결 종료
+        conn.close()
     else:
         return
 

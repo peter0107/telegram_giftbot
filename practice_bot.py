@@ -35,7 +35,7 @@ db_config={
     'host': 'giftbot-database.cc0lokhfxaeb.us-east-2.rds.amazonaws.com',
     'user': 'admin',
     'password': 'junemoiscute',
-    'database': 'participants'
+    'database': 'giftbot'
 }
 
 
@@ -87,7 +87,7 @@ async def pick(update: Update, context: CallbackContext) -> None:
         cursor=conn.cursor(dictionary=True)
 
         #참가자 목록을 가져오기
-        cursor.execute('SELECT * FROM phoneNumber')
+        cursor.execute('SELECT * FROM participants')
         results=cursor.fetchall()
 
         if not results:
@@ -96,7 +96,7 @@ async def pick(update: Update, context: CallbackContext) -> None:
             return
     
         chosen_user=random.choice(results)
-        await update.message.reply_text(f"@{chosen_user['phoneNumber']}님 축하드립니다!! 당첨되셨습니다.")
+        await update.message.reply_text(f"{chosen_user['phoneNumber']}님 축하드립니다!! 당첨되셨습니다.")
         
 
         #연결 종료

@@ -22,7 +22,7 @@ function App() {
     event.preventDefault();
 
     try{
-      const response=await axios.post('http://localhost:4000/api/participants',{
+      const response=await axios.post('13.58.210.211/api/participants',{
         phoneNumber
       });
 
@@ -53,7 +53,7 @@ function App() {
 
   const handleShowParticipants= async () => {
     try {
-      const response = await axios.get('http://localhost:4000/api/participants');
+      const response = await axios.get('13.58.210.211/api/participants');
       const participantList = response.data.map(participant => participant.phoneNumber).join('\n');
       alert(`참가자 목록: \n${participantList}`);
     } catch (error) {

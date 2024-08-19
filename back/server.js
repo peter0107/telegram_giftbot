@@ -6,7 +6,7 @@ const app=express();
 app.use(cors());
 app.use(express.json());
 
-const PORT=process.env.PORT || 4000;
+const PORT=process.env.PORT || 80;
 
 const db=mysql.createConnection({
     host: 'giftbot-database.cc0lokhfxaeb.us-east-2.rds.amazonaws.com',

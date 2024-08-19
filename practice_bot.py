@@ -46,7 +46,7 @@ db_config={
 async def start(update: Update, context: CallbackContext)->None:
     
     
-    url="https://giftbot.netlify.app/"
+    url="https://giftbot.netlify.app"
     keyboard=[
         [
             InlineKeyboardButton("참여",url=url)

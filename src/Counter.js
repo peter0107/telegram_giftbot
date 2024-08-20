@@ -26,7 +26,7 @@ function App() {
         phoneNumber
       },{
         header: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'text/plain'
         }
       });
 

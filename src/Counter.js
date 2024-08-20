@@ -25,7 +25,7 @@ function App() {
       const response=await axios.post('https://3.144.239.116:4000/api/participants',{
         phoneNumber
       },{
-        header: {
+        headers: {
           'Content-Type': 'text/plain'
         }
       });

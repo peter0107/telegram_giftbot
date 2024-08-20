@@ -22,11 +22,11 @@ function App() {
     event.preventDefault();
 
     try{
-      const response=await axios.post('http://3.133.86.21:4000/api/participants',{
+      const response=await axios.post('https://3.133.86.21:4000/api/participants',{
         phoneNumber
       },{
         header: {
-          'Content-Type': 'applicaiton/json'
+          'Content-Type': 'application/json'
         }
       });
 
@@ -68,7 +68,7 @@ function App() {
 
   const handleShowParticipants= async () => {
     try {
-      const response = await axios.get('http://3.133.86.21:4000/api/participants');
+      const response = await axios.get('https://3.133.86.21:4000/api/participants');
       const participantList = response.data.map(participant => participant.phoneNumber).join('\n');
       alert(`참가자 목록: \n${participantList}`);
     } catch (error) {

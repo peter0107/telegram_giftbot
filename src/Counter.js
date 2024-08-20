@@ -57,7 +57,7 @@ function App() {
         alert(`참여에 실패했습니다. 서버 응답: ${error.response.status} - ${error.response.data.error || error.response.statusText}`);
       } else if (error.request) {
         // 요청이 전송되었으나 응답을 받지 못한 경우
-        alert('참여에 실패했습니다. 서버로부터 응답이 없습니다. 네트워크 문제일 수 있습니다.');
+        alert(`${error.request} 참여에 실패했습니다. 서버로부터 응답이 없습니다. 네트워크 문제일 수 있습니다.`);
       } else {
         // 요청 설정 중에 오류가 발생한 경우
         alert(`참여에 실패했습니다. 오류 메시지: ${error.message}`);

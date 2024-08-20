@@ -26,7 +26,10 @@ function App() {
         phoneNumber
       },{
         headers: {
-          'Content-Type': 'text/plain'
+          'Access-Control-Allow-Origin': 'https://3.144.239.116:4000',
+          'Accept': 'text/plain',       
+          'Content-Type': 'text/plain',
+          'withCredentials': 'true'
         }
       });
 

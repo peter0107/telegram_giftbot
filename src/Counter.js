@@ -24,6 +24,10 @@ function App() {
     try{
       const response=await axios.post('http://3.133.86.21:4000/api/participants',{
         phoneNumber
+      },{
+        header: {
+          'Content-Type': 'applicaiton/json'
+        }
       });
 
       //정상적인 경우

@@ -22,11 +22,11 @@ function App() {
     event.preventDefault();
 
     try{
-      const response=await axios.post('http://18.219.229.180:4000/api/participants',{
+      const response=await axios.post('http://3.134.162.171:4000/api/participants',{
         phoneNumber
       },{
         headers: {
-          'Access-Control-Allow-Origin': 'http://18.219.229.180:4000',
+          'Access-Control-Allow-Origin': 'http://3.134.162.171:4000',
           'Accept': 'text/plain',       
           'Content-Type': 'text/plain',
           'withCredentials': 'true'
@@ -71,7 +71,7 @@ function App() {
 
   const handleShowParticipants= async () => {
     try {
-      const response = await axios.get('http://18.219.229.180:4000/api/participants');
+      const response = await axios.get('http://3.134.162.171:4000/api/participants');
       const participantList = response.data.map(participant => participant.phoneNumber).join('\n');
       alert(`참가자 목록: \n${participantList}`);
     } catch (error) {
